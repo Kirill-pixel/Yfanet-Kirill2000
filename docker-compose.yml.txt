@@ -1,0 +1,19 @@
+services:
+  nginx:
+    image: nginx:latest
+    hostname: nginx
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./serverspace/project/nginx.conf:/etc/nginx/nginx.conf
+      - ./serverspace/html/files/hello.html:/usr/share/nginx/hello.html
+      - ./serverspace/project/conf-files/site.conf:/etc/nginx/conf.d/site.conf
+    networks:
+      dnet:
+
+networks:
+  dnet:
+    name: dnet
+    driver: bridge
